@@ -12,3 +12,6 @@ const images = [
     alt: 'Group of Horses Running',
   },
 ];
+
+// let target = document.querySelector('#target');
+// target.insertAdjacentHTML('beforeEnd', '<p>!</p>');
