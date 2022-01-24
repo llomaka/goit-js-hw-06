@@ -13,5 +13,12 @@ const images = [
   },
 ];
 
-// let target = document.querySelector('#target');
-// target.insertAdjacentHTML('beforeEnd', '<p>!</p>');
+const list = document.querySelector(".gallery");
+const makeGalleryRefs = images => {
+  return images.map(({ url, alt }) => {
+    return `<li class="gallery__item"><img class="gallery__image" src="${url}" alt="${alt}"></li>`;
+  }).join('')
+};
+const galleryRefs = makeGalleryRefs(images);
+// console.log(galleryRefs);
+list.insertAdjacentHTML('beforeEnd', galleryRefs);
