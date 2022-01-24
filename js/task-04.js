@@ -36,4 +36,4 @@ counter.prototype.decrement = function () {
     this._value -= this._step;
 };
 
-new counter();
+new counter(0);
