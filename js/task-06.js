@@ -1,10 +1,14 @@
 const textInput = document.querySelector("#validation-input");
-const output = document.querySelector("#name-output");
 
-textInput.addEventListener("input", (event) => {
-    if (event.currentTarget.value.length !== 0) {
-        output.textContent = event.currentTarget.value;
+textInput.addEventListener("blur", () => {
+    if (textInput.value.length === 0) { return;}
+    else if (textInput.value.length > textInput.dataset.length) {
+        textInput.classList.add('invalid');
     } else {
-        output.textContent = 'Anonymous';
+        textInput.classList.add('valid');
     }
+});
+
+textInput.addEventListener("focus", () => {
+    textInput.classList.remove('valid', 'invalid');
 });
