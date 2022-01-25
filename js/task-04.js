@@ -34,8 +34,8 @@
 // };
 // new counter(0);
 
-const CounterPlugin = function (initialValue = 0) {
-  this._value = initialValue;
+const CounterPlugin = function (counterValue = 0) {
+  this._counterValue = counterValue;
   this._step = 1;
   this._refs = this._getRefs();
   this._bindEvents();
@@ -47,7 +47,7 @@ CounterPlugin.prototype._getRefs = function () {
   refs.container = document.querySelector('#counter');
   refs.incrementBtn = refs.container.querySelector('[data-action="increment"]');
   refs.decrementBtn = refs.container.querySelector('[data-action="decrement"]');
-  refs.value = refs.container.querySelector('#value');
+  refs.counterValue = refs.container.querySelector('#value');
 
   return refs;
 };
@@ -65,15 +65,15 @@ CounterPlugin.prototype._bindEvents = function () {
 };
 
 CounterPlugin.prototype.updateValueUI = function () {
-  this._refs.value.textContent = this._value;
+  this._refs.counterValue.textContent = this._counterValue;
 };
 
 CounterPlugin.prototype.increment = function () {
-  this._value += this._step;
+  this._counterValue += this._step;
 };
 
 CounterPlugin.prototype.decrement = function () {
-  this._value -= this._step;
+  this._counterValue -= this._step;
 };
 
 new CounterPlugin(15);
