@@ -29,17 +29,22 @@ let boxesQuantity = 0;
   
 const countBoxesQuantity=function() {
   if (inputFieldRef.value.length !== 0) {
-    boxesQuantity = inputFieldRef.value;
+    boxesQuantity = inputFieldRef.value.trim();
     console.log(boxesQuantity);
     return boxesQuantity;
   }
 };
 
-inputFieldRef.addEventListener("input", countBoxesQuantity);
+console.log(countBoxesQuantity());
 
-const createBoxes = function(amount) { 
+inputFieldRef.addEventListener("input", countBoxesQuantity);
+boxesQuantity = inputFieldRef.value;
+console.log(boxesQuantity);
+
+const createBoxes = function (amount) { 
+  console.log(amount);
   const boxesArray = [];
-  for (let i = 0; i <= amount; i += 1) {
+  for (let i = 1; i <= amount; i += 1) {
     const boxElement = document.createElement('div');
     boxElement.style.width = (30 + i * 10) + 'px';
     boxElement.style.height = (30 + i * 10) + 'px';
@@ -48,7 +53,8 @@ const createBoxes = function(amount) {
     boxesArray.push(boxElement);
   }
   console.log(boxesArray);
-  boxesRef.insertAdjacentHTML("beforeend", ...boxesArray);
+  boxesRef.insertAdjacentHTML("beforeEnd", boxesArray.join(''));
+  inputFieldRef.textContent = '';
   console.log('Коллекция элементов создана');
 };
 
@@ -57,5 +63,6 @@ const destroyBoxes = function() {
   console.log('Коллекция элементов очищена');
 };
 
+console.log(boxesQuantity);
 createCollectionButton.addEventListener('click', createBoxes(boxesQuantity));
 destroyCollectionButton.addEventListener('click', destroyBoxes);
