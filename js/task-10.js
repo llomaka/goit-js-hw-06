@@ -25,20 +25,19 @@ const inputFieldRef = document.querySelector('input');
 const createCollectionButton = document.querySelector('[data-create]');
 const destroyCollectionButton = document.querySelector('[data-destroy]');
 const boxesRef = document.querySelector('#boxes');
-let boxesQuantity = 0;  
-  
+let boxesQuantity = 0;
+
 const countBoxesQuantity=function() {
   if (inputFieldRef.value.length !== 0) {
     boxesQuantity = inputFieldRef.value.trim();
-    console.log(boxesQuantity);
+    // console.log(boxesQuantity);
     return boxesQuantity;
   }
 };
 
-console.log(countBoxesQuantity());
-
 inputFieldRef.addEventListener("input", countBoxesQuantity);
-boxesQuantity = inputFieldRef.value;
+inputFieldRef.addEventListener("input", event => event.preventDefault());
+boxesQuantity = countBoxesQuantity();
 console.log(boxesQuantity);
 
 const createBoxes = function (amount) { 
@@ -64,5 +63,5 @@ const destroyBoxes = function() {
 };
 
 console.log(boxesQuantity);
-createCollectionButton.addEventListener('click', createBoxes(boxesQuantity));
-destroyCollectionButton.addEventListener('click', destroyBoxes);
+createCollectionButton.addEventListener('mousedown', createBoxes(boxesQuantity));
+destroyCollectionButton.addEventListener('mousedown', destroyBoxes);
