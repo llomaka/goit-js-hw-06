@@ -35,10 +35,10 @@ const countBoxesQuantity=function() {
   }
 };
 
-inputFieldRef.addEventListener("input", countBoxesQuantity);
-inputFieldRef.addEventListener("input", event => event.preventDefault());
-boxesQuantity = countBoxesQuantity();
-console.log(boxesQuantity);
+// inputFieldRef.addEventListener("input", countBoxesQuantity);
+// inputFieldRef.addEventListener("input", event => event.preventDefault());
+// boxesQuantity = countBoxesQuantity();
+// console.log(boxesQuantity);
 
 const createBoxes = function (amount) { 
   console.log(amount);
@@ -62,6 +62,22 @@ const destroyBoxes = function() {
   console.log('Коллекция элементов очищена');
 };
 
-console.log(boxesQuantity);
-createCollectionButton.addEventListener('mousedown', createBoxes(boxesQuantity));
+// createCollectionButton.addEventListener('mousedown', createBoxes(boxesQuantity));
+createCollectionButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  boxesQuantity = event.currentTarget.previousElementSibling.value;
+  const boxesArray = [];
+  for (let i = 0; i < boxesQuantity; i += 1) {
+    const boxElement = document.createElement('div');
+    boxElement.style.width = (30 + i * 10) + 'px';
+    boxElement.style.height = (30 + i * 10) + 'px';
+    boxElement.style.backgroundColor = getRandomHexColor();
+    console.log(boxElement);
+    boxesArray.push(boxElement);
+  }
+  console.log(boxesArray, boxesQuantity);
+  boxesRef.insertAdjacentHTML("beforeEnd", boxesArray.join(''));
+  inputFieldRef.textContent = '';
+  console.log('Коллекция элементов создана');
+});
 destroyCollectionButton.addEventListener('mousedown', destroyBoxes);
