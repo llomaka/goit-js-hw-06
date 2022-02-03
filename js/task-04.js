@@ -77,3 +77,19 @@ CounterPlugin.prototype.decrement = function () {
 };
 
 new CounterPlugin(15);
+
+/*
+const btnDec = document.querySelector('[data-action="increment"]');
+const btnInc = document.querySelector('[data-action="decrement"]');
+const value = document.querySelector('#value');
+console.log(value);
+let counterValue = 0;
+const mouseClickDec = event => {
+  value.textContent = counterValue -=1;  
+};
+const mouseClickInc = event => {
+  value.textContent = counterValue +=1;  
+};
+btnDec.addEventListener('click', mouseClickDec);
+btnInc.addEventListener('click', mouseClickInc);
+*/
