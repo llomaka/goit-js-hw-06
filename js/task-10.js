@@ -27,57 +27,31 @@ const destroyCollectionButton = document.querySelector('[data-destroy]');
 const boxesRef = document.querySelector('#boxes');
 let boxesQuantity = 0;
 
-const countBoxesQuantity=function() {
-  if (inputFieldRef.value.length !== 0) {
-    boxesQuantity = inputFieldRef.value.trim();
-    // console.log(boxesQuantity);
-    return boxesQuantity;
-  }
-};
-
-// inputFieldRef.addEventListener("input", countBoxesQuantity);
-// inputFieldRef.addEventListener("input", event => event.preventDefault());
-// boxesQuantity = countBoxesQuantity();
-// console.log(boxesQuantity);
-
-const createBoxes = function (amount) { 
-  console.log(amount);
-  const boxesArray = [];
-  for (let i = 1; i <= amount; i += 1) {
-    const boxElement = document.createElement('div');
-    boxElement.style.width = (30 + i * 10) + 'px';
-    boxElement.style.height = (30 + i * 10) + 'px';
-    boxElement.style.color = getRandomHexColor();
-    console.log(boxElement);
-    boxesArray.push(boxElement);
-  }
-  console.log(boxesArray);
-  boxesRef.insertAdjacentHTML("beforeEnd", boxesArray.join(''));
-  inputFieldRef.textContent = '';
-  console.log('Коллекция элементов создана');
-};
+// const errorAlert = function (amount) { 
+//   alert(`Невозможно создать коллекцию из ${amount} элементов. Введите число от 1 до 100.`);
+// };
 
 const destroyBoxes = function() { 
   boxesRef.innerHTML = '';
   console.log('Коллекция элементов очищена');
 };
 
-// createCollectionButton.addEventListener('mousedown', createBoxes(boxesQuantity));
 createCollectionButton.addEventListener('click', (event) => {
   event.preventDefault();
   boxesQuantity = event.currentTarget.previousElementSibling.value;
-  const boxesArray = [];
-  for (let i = 0; i < boxesQuantity; i += 1) {
-    const boxElement = document.createElement('div');
-    boxElement.style.width = (30 + i * 10) + 'px';
-    boxElement.style.height = (30 + i * 10) + 'px';
-    boxElement.style.backgroundColor = getRandomHexColor();
-    console.log(boxElement);
-    boxesArray.push(boxElement);
+  if (boxesQuantity <= 0 || boxesQuantity > 100) {
+    boxesRef.insertAdjacentHTML("afterbegin", `Невозможно создать коллекцию из ${boxesQuantity} элементов. Введите число от 1 до 100.<br>`);
+    inputFieldRef.value = '';
+    return;
   }
-  console.log(boxesArray, boxesQuantity);
-  boxesRef.insertAdjacentHTML("beforeEnd", boxesArray.join(''));
-  inputFieldRef.textContent = '';
-  console.log('Коллекция элементов создана');
+  let markup = '';
+  for (let i = 0; i < boxesQuantity; i += 1) {
+    markup += `<div style="width: ${30 + i*10}px; height: ${30 + i*10}px; background-color: ${getRandomHexColor()}"></div>`;
+  }
+  boxesRef.insertAdjacentHTML("beforeend", markup);
+  inputFieldRef.value = '';
+  console.log(`Создана коллекция из ${boxesQuantity} элементов`);
+  // event.currentTarget.previousElementSibling.reset();
 });
-destroyCollectionButton.addEventListener('mousedown', destroyBoxes);
+
+destroyCollectionButton.addEventListener('click', destroyBoxes);
